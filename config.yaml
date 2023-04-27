@@ -1,5 +1,5 @@
 baseURL: https://literate-devops.io/
-theme: risotto
+theme: risotto-solarized
 title: Literate DevOps
 author: James Hilling
 copyright: © 2023 James Hilling
@@ -22,7 +22,7 @@ menu:
 paginate: 3
 params:
   about:
-    description: Preparing to be a certified Kubernetes administrator (with four years professional Kubernetes experience). Part time Emacs and literate DevOps enthusiast.
+    description: Preparing for the certified Kubernetes administrator exam (with four years professional Kubernetes experience). Part time Emacs and literate DevOps enthusiast.
     logo: images/console-dark.svg
     title: James Hilling BSc
   socialLinks:
