@@ -47,7 +47,6 @@ markup:
     codeFences: true
     guessSyntax: false
     style: solarized-dark
-#relativeURLs: true
 sectionPagesMenu: main
 taxonomies:
   category: categories
