@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Education on Literate DevOps</title>
+    <link>https://literate-devops.io/categories/education/</link>
+    <description>Recent content in Education on Literate DevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2023 James Hilling</copyright>
+    <lastBuildDate>Tue, 18 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://literate-devops.io/categories/education/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Curriculum Vitae</title>
+      <link>https://literate-devops.io/cv/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/cv/</guid>
+      <description> Education Academic qualifications.
+College A-levels.
+University Degree qualification.
+Employment Employment history.
+Sabbatical </description>
+    </item>
+    
+  </channel>
+</rss>

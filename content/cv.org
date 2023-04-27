@@ -1,0 +1,23 @@
+#+date: 2023-04-18
+#+title: Curriculum Vitae
+#+aliases = CV
+#+categories[]: Career Education Jobs Work
+#+description: Curriculum Vitae for James Hilling BSc
+#+draft: false
+#+startup: showall
+
+* Education
+
+Academic qualifications.
+
+** College
+A-levels.
+
+** University
+Degree qualification.
+
+
+* Employment
+Employment history.
+
+* Sabbatical

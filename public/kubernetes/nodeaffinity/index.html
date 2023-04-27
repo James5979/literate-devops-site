@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head><title>Node affinity &ndash; Literate DevOps</title>
+<meta name="description" content="Preparing to be a certified Kubernetes administrator (with four years professional Kubernetes experience). Part time Emacs and literate DevOps enthusiast.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://literate-devops.io/css/palettes/solarized-dark.css">
+<link rel="stylesheet" href="https://literate-devops.io/css/risotto.css">
+<link rel="stylesheet" href="https://literate-devops.io/css/custom.css">
+</head>
+
+    <body>
+        <div class="page">
+
+            <header class="page__header"><h1 class="page__logo"><a href="https://literate-devops.io/" class="page__logo-inner">Literate DevOps</a></h1>
+<nav class="page__nav main-nav">
+    <ul>
+    
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://literate-devops.io/cv/" title="">CV</a></li>
+    
+    <li class="main-nav__item"><a class="nav-main-item" href="https://literate-devops.io/kubernetes/" title="">Kubernetes</a></li>
+    
+    </ul>
+</nav>
+
+</header>
+
+            <section class="page__body">
+    <header class="content__header">
+        <h1>Node affinity</h1>
+    </header>
+    <div class="content__body">
+        <p>Node affinity affects what nodes a pod can be scheduled on, using a selection of labels and operator logic.</p>
+<p>Example manifest:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span><span style="color:#268bd2">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span><span style="color:#268bd2">kind</span>: Pod
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span><span style="color:#268bd2">metadata</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span>  <span style="color:#268bd2">name</span>: nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span>  <span style="color:#268bd2">namespace</span>: default
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span>  <span style="color:#268bd2">labels</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span>    <span style="color:#268bd2">app</span>: nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span><span style="color:#268bd2">spec</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span>  <span style="color:#268bd2">containers</span>:
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span>  - <span style="color:#268bd2">name</span>: nginx
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span>    <span style="color:#268bd2">image</span>: nginx
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span>  <span style="color:#268bd2">affinity</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span>    <span style="color:#268bd2">nodeAffinity</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span>      <span style="color:#268bd2">requiredDuringSchedulingIgnoredDuringExecution</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span>        <span style="color:#268bd2">nodeSelectorTerms</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span><span>        - <span style="color:#268bd2">matchExpressions</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span>          - <span style="color:#268bd2">key</span>: compute
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span>            <span style="color:#268bd2">operator</span>: In
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span>            <span style="color:#268bd2">values</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span><span>            - large
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span>            - medium
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span>          - <span style="color:#268bd2">key</span>: compute
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span><span>            <span style="color:#268bd2">operator</span>: NotIn
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span><span>            <span style="color:#268bd2">values</span>:
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span><span>            - small
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span><span>          - <span style="color:#268bd2">key</span>: gpu
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span><span>            <span style="color:#268bd2">operator</span>: Exists
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span><span>          - <span style="color:#268bd2">key</span>: quantum
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span><span>            <span style="color:#268bd2">operator</span>: DoesNotExist
+</span></span></code></pre></div><p><strong>CKA Exam Tip</strong>: node affinity requires that you reference the <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">kubernetes.io</a> documentation, since no imperative command exists. You can always use the <code>kubectl explain</code> command to infer what fields you should use.</p>
+<p><strong>Tip</strong>: use a combination of taints and tolerations with node affinity to ensure that specific workloads can only be scheduled on certain nodes.</p>
+
+    </div>
+    <footer class="content__footer"></footer>
+
+            </section>
+
+            <section class="page__aside">
+                <div class="aside__about">
+<div class="aside__about">
+    <img class="about__logo" src="https://literate-devops.io/images/console-dark.svg" alt="Logo">
+<h1 class="about__title">James Hilling BSc</h1>
+<p class="about__description">Preparing to be a certified Kubernetes administrator (with four years professional Kubernetes experience). Part time Emacs and literate DevOps enthusiast.</p>
+</div>
+
+
+<ul class="aside__social-links">
+    
+    <li>
+        <a href="https://github.com/James5979" rel="me" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="mailto:literate-devops@use.startmail.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+    <li>
+        <a href="https://mastodon.social/@james5979" rel="me" aria-label="Mastodon" title="Mastodon"><i class="fa-solid fa-comment" aria-hidden="true"></i></a>&nbsp;
+    </li>
+    
+</ul>
+</div>
+                <hr>
+                <div class="aside__content">
+    
+    
+
+                </div>
+            </section>
+
+            <footer class="page__footer"><p>
+    
+    
+    
+    
+    
+    
+      
+    
+      
+    
+    
+    
+</p>
+<br /><br />
+<p class="copyright">© 2023 James Hilling</p>
+<p class="advertisement">Powered by <a href="https://gohugo.io/">hugo</a> and <a href="https://github.com/joeroe/risotto">risotto</a>.</p>
+</footer>
+
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,6 @@
+#+author: James
+#+title: Kubernetes
+#+draft: false
+#+startup: showall
+
+A collection of personal Kubernetes notes and manifests.

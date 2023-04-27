@@ -1,0 +1,12 @@
+#+draft: false
+#+startup: showall
+
+My minimalist tech blog.
+
+*Key interests:*
+
+1) Kubernetes
+2) Endpoint security
+3) Public cloud
+4) Emacs Lisp
+5) Literate DevOps

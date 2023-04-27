@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>command on Literate DevOps</title>
+    <link>https://literate-devops.io/tags/command/</link>
+    <description>Recent content in command on Literate DevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2023 James Hilling</copyright><atom:link href="https://literate-devops.io/tags/command/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scaling</title>
+      <link>https://literate-devops.io/kubernetes/scaling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/scaling/</guid>
+      <description>To scale a replication controller, replicaset, statefulset, or deployment, use the kubectl scale command:
+kubectl scale $RESOURCE/$NAME --filename=$FILE --namespace=default --replicas=$NUMBER Pitfall: this will not update the value for the replicas within the manifest.
+Scale a deployment Imperative command:
+kubectl scale deployments.apps/$NAME --replicas=$NUMBER deployment/$NAME --namespace=default Alternatively, update the number of replicas in the manifest and apply the changes using kubectl apply:
+kubectl apply --filename=$FILE </description>
+    </item>
+    
+    <item>
+      <title>Exposing</title>
+      <link>https://literate-devops.io/kubernetes/exposing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/exposing/</guid>
+      <description>Expose a Kubernetes object to a service.
+Imperative command:
+kubectl expose $RESOURCE/$NAME --name=$SERVICE_NAME --namespace=default --port=$PORT --protocol=TCP --selector=$LABELS --target-port=$PORT --type=$SERVICE_TYPE Pitfall: the kubectl expose command will not generate the nodePort field for you automatically, whereas kubectl create service nodeport will. Another difference between these two commands is that the expose command will fail if the resource does not exist beforehand, whereas the create command will not.
+You can also use the --expose option with the kubectl run command, when you only need to expose a pod:</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes documentation</title>
+      <link>https://literate-devops.io/kubernetes/documentation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/documentation/</guid>
+      <description>Use the kubectl explain command to output Kubernetes documentation for a particular resource.
+Examples
+Show the documentation for the ReplicaSet resource:
+kubectl explain ReplicaSet | head --lines=10 Recursive output shows all nested fields within the resource:
+kubectl explain ReplicaSet.spec --recursive </description>
+    </item>
+    
+    <item>
+      <title>Counting objects</title>
+      <link>https://literate-devops.io/kubernetes/counting-objects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/counting-objects/</guid>
+      <description>To count the total number of objects in a resource (per namespace), use the --no-headers option and pipe the output to the wc --lines command:
+kubectl get $RESOURCE --namespace=$NAMESPACE --no-headers | wc --lines </description>
+    </item>
+    
+    <item>
+      <title>Create command</title>
+      <link>https://literate-devops.io/kubernetes/create-command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/create-command/</guid>
+      <description>To imperatively create a Kubernetes object using a manifest:
+kubectl create --filename $FILE </description>
+    </item>
+    
+    <item>
+      <title>Edit command</title>
+      <link>https://literate-devops.io/kubernetes/edit-command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/edit-command/</guid>
+      <description>To imperatively edit a Kubernetes object:
+kubectl edit $RESOURCE/$NAME --namespace=$NAMESPACE The edit command is not advisable, since there exists no easy way to keep track of the changes made to a Kubernetes object (unless you are using annotations). But even with the existence of annotations, there still exists the issue of not having the changes reviewed (and approved). To fix this, use a revision control system, such as git, and make the changes there (in a manifest file that is under revision control).</description>
+    </item>
+    
+    <item>
+      <title>Replace command</title>
+      <link>https://literate-devops.io/kubernetes/replace-command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/replace-command/</guid>
+      <description>To imperatively replace a Kubernetes object (with a new object):
+kubectl replace --filename $FILE To completely delete and recreate an existing Kubernetes object:
+kubectl replace --filename $FILE --force </description>
+    </item>
+    
+    <item>
+      <title>Apply command</title>
+      <link>https://literate-devops.io/kubernetes/apply-command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/apply-command/</guid>
+      <description>The best way to create and make changes to a Kubernetes object is to use the declarative approach, via the apply command.
+This approach allows you to create Kubernetes objects that can be updated when changes are made to their manifests without having to fully replace the Kubernetes objects like is with the case when using the imperative approach.
+kubectl apply --filename $FILE </description>
+    </item>
+    
+    <item>
+      <title>Custom columns</title>
+      <link>https://literate-devops.io/kubernetes/custom-columns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/custom-columns/</guid>
+      <description>Custom columns allows you to customise table output.
+Example custom-columns (using JSONPath syntax):
+kubectl get pods --namespace=default --output=custom-columns=NAME:metadata.name,IP:status.podIP,NODE:spec.nodeName Output:
+NAME IP NODE nginx-5ccbbcf759-28tlk 10.244.1.18 lab-cluster-worker2 nginx-5ccbbcf759-29dz5 10.244.2.11 lab-cluster-worker nginx-5ccbbcf759-w5k65 10.244.2.12 lab-cluster-worker </description>
+    </item>
+    
+    <item>
+      <title>Taints</title>
+      <link>https://literate-devops.io/kubernetes/taints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/taints/</guid>
+      <description>Taint a node and mark it as non-schedulable:
+kubectl taint nodes $NODE $LABEL:NoSchedule Add multiple taints to a node:
+kubectl taint nodes $NODE $LABEL1:NoSchedule $LABEL2:NoSchedule Taint a node and prefer not to schedule any pods (without a toleration):
+kubectl taint nodes $NODE $LABEL:PreferNoSchedule Taint a node and evict any pods (without a toleration):
+kubectl taint nodes $NODE $LABEL:NoExecute View all taints on a particular node:
+kubectl describe nodes/$NODE | grep Taints Remove a taint from a node:</description>
+    </item>
+    
+    <item>
+      <title>Labels</title>
+      <link>https://literate-devops.io/kubernetes/labels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://literate-devops.io/kubernetes/labels/</guid>
+      <description>Labels are key-value pairs associated with Kubernetes objects. They allow the classification of objects, e.g. defining organisational structure.
+List all labels associated with an object:
+kubectl label nodes/$OBJECT --list List all labels associated with an object using the kubectl get command:
+kubectl get $RESOURCE/$NAME --show-labels Count the total number of labels for an object:
+kubectl label $RESOURCE/$OBJECT --list | wc --lines Add new labels:
+kubectl label $RESOURCE/$OBJECT1 $LABEL1 $LABEL2 kubectl label $RESOURCE/$OBJECT2 $LABEL2 $LABEL3 Remove existing labels:</description>
+    </item>
+    
+  </channel>
+</rss>
