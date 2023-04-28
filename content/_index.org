@@ -1,12 +1,12 @@
 #+draft: false
 #+startup: showall
 
-My minimalist tech blog.
+A minimalist's tech blog.
 
 *Key interests:*
 
-1) Kubernetes
+1) [[/portfolio/kubernetes/][Kubernetes]]
 2) Endpoint security
 3) Public cloud
-4) Emacs Lisp
+4) [[/portfolio/lisp/][Lisp]]
 5) Literate DevOps

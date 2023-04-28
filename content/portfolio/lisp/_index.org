@@ -1,0 +1,6 @@
+#+author: James
+#+title: Lisp
+#+draft: false
+#+startup: showall
+
+A collection of my personal Emacs Lisp and clojure (coming soon).

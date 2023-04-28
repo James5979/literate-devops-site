@@ -3,4 +3,4 @@
 #+draft: false
 #+startup: showall
 
-A collection of personal Kubernetes notes and manifests.
+A collection of my personal Kubernetes notes and manifests.

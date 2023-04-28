@@ -1,0 +1,6 @@
+#+author: James
+#+title: Portfolio
+#+draft: false
+#+startup: showall
+
+A portfolio of my interests.

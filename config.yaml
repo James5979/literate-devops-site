@@ -15,10 +15,10 @@ menu:
     name: CV
     url: /cv/
     weight: 10
-  - identifier: kubernetes
-    name: Kubernetes
-    url: /kubernetes/
-    weight: 10
+  - identifier: portfolio
+    name: Portfolio
+    url: /portfolio/
+    weight: 20
 paginate: 3
 params:
   about:
