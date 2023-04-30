@@ -4,7 +4,7 @@ draft = false
 weight = 3
 +++
 
-A ReplicationController is responsible for keeping the total number of pod replicas contant.
+A ReplicationController is responsible for keeping the total number of replicas contant.
 
 
 ## Create a replication controller {#create-a-replication-controller}
@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: docker.io/library/nginx:latest
+        image: docker.io/library/nginx:1.24.0
         imagePullPolicy: Never
 ```
 

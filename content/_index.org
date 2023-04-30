@@ -1,6 +1,8 @@
 #+draft: false
 #+startup: showall
 
+🚧 *SITE UNDER CONSTRUCTION* 🚧
+
 A minimalist's tech blog.
 
 *Key interests:*

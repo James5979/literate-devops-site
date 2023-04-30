@@ -4,7 +4,7 @@ draft = false
 weight = 5
 +++
 
-A Kubernetes deployment provides declaritive updates for Pods and Replicasets, with zero downtime during updates and the ability to rollback, when necessary.
+A Kubernetes deployment provides declaritive updates for [Pods](/portfolio/kubernetes/pod/) and [Replicasets](/portfolio/kubernetes/replicaset/), with zero downtime during updates and the ability to rollback when necessary.
 
 
 ## Create a deployment {#create-a-deployment}
@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: docker.io/library/nginx:latest
+        image: docker.io/library/nginx:1.24.0
         imagePullPolicy: Never
 ```
 
