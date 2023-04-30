@@ -6,7 +6,7 @@ weight = 4
 
 A ReplicaSet ensures that there is always a stable number of pods based on the number of replicas.
 
-**Note**: replicasets are very similar to replication controllers, with the exception that a replicaset can adopt pre-existing pods (using a selector).
+**Note**: replicasets are very similar to [replication controller](/portfolio/kubernetes/replicationcontroller/), with the exception that a replicaset can adopt pre-existing pods (using a selector).
 
 
 ## Create a replicaset {#create-a-replicaset}
@@ -45,7 +45,7 @@ Resource output for a replicaset:
 kubectl get replicasets.apps/$NAME --namespace=default
 ```
 
-Show all objects created by a replicaset:
+Show all objects created by a replicaset (using labels):
 
 ```shell
 kubectl get all --namespace=default --selector=$LABELS

@@ -3,4 +3,4 @@
 #+draft: false
 #+startup: showall
 
-A collection of my personal Emacs Lisp and clojure (coming soon).
+A collection of my personal Emacs Lisp and Clojure (coming soon).

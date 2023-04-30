@@ -3,4 +3,4 @@
 #+draft: false
 #+startup: showall
 
-A collection of my personal Kubernetes notes and manifests.
+A [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]] of my personal Kubernetes notes and manifests.

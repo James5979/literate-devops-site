@@ -4,9 +4,7 @@ draft = false
 weight = 5
 +++
 
-A deployment provides declaritive updates for Pods and Replicasets, with zero downtime and rolebacks - whenever necessary.
-
-A deployment is the recommended way to deploy Kubernetes applications.
+A Kubernetes deployment provides declaritive updates for Pods and Replicasets, with zero downtime during updates and the ability to rollback, when necessary.
 
 
 ## Create a deployment {#create-a-deployment}
@@ -49,13 +47,13 @@ Resource output for a deployment:
 kubectl get deployments.apps/$NAME --namespace=default
 ```
 
-Show all objects created by a deployment:
+Show all objects created by a deployment (using labels):
 
 ```shell
 kubectl get all --namespace=default --selector=$LABELS
 ```
 
-Update a container image used within a deployment:
+Imperatively update a container image within a deployment:
 
 ```shell
 kubectl set image deployments.apps/$NAME $CONTAINER=$IMAGE:$TAG

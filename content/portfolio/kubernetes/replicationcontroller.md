@@ -40,7 +40,7 @@ Resource output for a replication controller:
 kubectl get replicationcontroller/$NAME --namespace=default
 ```
 
-Show all objects created by a replication controller:
+Show all objects created by a replication controller (using labels):
 
 ```shell
 kubectl get all --namespace=default --selector=$LABELS
