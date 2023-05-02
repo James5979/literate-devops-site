@@ -1,0 +1,3 @@
+[submodule "themes/risotto-solarized"]
+	path = themes/risotto-solarized
+	url = https://github.com/James5979/risotto-solarized.git
