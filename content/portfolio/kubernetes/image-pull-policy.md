@@ -20,5 +20,5 @@ spec:
   containers:
   - name: nginx
     image: docker.io/library/nginx:latest
-    imagePullPolicy: Never
+    imagePullPolicy: IfNotPresent
 ```

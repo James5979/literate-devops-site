@@ -4,12 +4,10 @@ draft = false
 weight = 3
 +++
 
-A ReplicationController is responsible for keeping the total number of replicas contant.
+A ReplicationController is responsible for keeping the total number of replicas constant.
 
 
 ## Create a replication controller {#create-a-replication-controller}
-
-No imperative command.
 
 Example manifest:
 
@@ -31,7 +29,7 @@ spec:
       containers:
       - name: nginx
         image: docker.io/library/nginx:1.24.0
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
 ```
 
 Resource output for a replication controller:
@@ -40,7 +38,7 @@ Resource output for a replication controller:
 kubectl get replicationcontroller/$NAME --namespace=default
 ```
 
-Show all objects created by a replication controller (using labels):
+Show all objects created by a replication controller (via selectors):
 
 ```shell
 kubectl get all --namespace=default --selector=$LABELS

@@ -1,16 +1,16 @@
 +++
-title = "Port types"
+title = "Ports"
 draft = false
 weight = 7
 +++
 
-Types of port found within a Kubernetes service:
+Kubernetes service ports:
 
 <style>.table-nocaption table { width: 70%;  }</style>
 
 <div class="ox-hugo-table table-nocaption">
 
-| Field      | Description         |
+| Port       | Description         |
 |------------|---------------------|
 | targetPort | Port on the pod     |
 | port       | Port on the service |
@@ -18,7 +18,7 @@ Types of port found within a Kubernetes service:
 
 </div>
 
-The ports are networked together like so:
+The ports in the table (above) are networked together as follows:
 
 ```text
 LAN <--> nodePort|service|port <--> targetPort|pod

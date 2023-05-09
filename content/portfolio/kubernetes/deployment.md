@@ -4,7 +4,7 @@ draft = false
 weight = 5
 +++
 
-A Kubernetes deployment provides declaritive updates for [Pods](/portfolio/kubernetes/pod/) and [Replicasets](/portfolio/kubernetes/replicaset/), with zero downtime during updates and the ability to rollback when necessary.
+A Kubernetes deployment provides declaritive updates to [Pods](/portfolio/kubernetes/pod/) (using [Replicasets](/portfolio/kubernetes/replicaset/)), with the ability to rollback when necessary, and zero downtime when using a rolling update strategy.
 
 
 ## Create a deployment {#create-a-deployment}
@@ -30,6 +30,11 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -38,7 +43,7 @@ spec:
       containers:
       - name: nginx
         image: docker.io/library/nginx:1.24.0
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
 ```
 
 Resource output for a deployment:
@@ -47,13 +52,13 @@ Resource output for a deployment:
 kubectl get deployments.apps/$NAME --namespace=default
 ```
 
-Show all objects created by a deployment (using labels):
+Show all objects created by a deployment (via selectors):
 
 ```shell
 kubectl get all --namespace=default --selector=$LABELS
 ```
 
-Imperatively update a container image within a deployment:
+Imperative command to update a container image in a deployment:
 
 ```shell
 kubectl set image deployments.apps/$NAME $CONTAINER=$IMAGE:$TAG

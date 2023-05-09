@@ -5,13 +5,13 @@ draft = false
 weight = 6
 +++
 
-To scale a replication controller, replicaset, statefulset, or deployment, use the `kubectl scale` command:
+To scale the number replicas used by certain Kubernetes resources, use the `kubectl scale` command:
 
 ```shell
-kubectl scale $RESOURCE/$NAME --filename=$FILE --namespace=default --replicas=$NUMBER
+kubectl scale --replicas=$NUMBER --filename=$FILE --namespace=default
 ```
 
-**Pitfall**: this will not update the value for the replicas within the manifest.
+**Note**: this command will not update the manifest file specified within the `--filename` option (above).
 
 
 ## Scale a deployment {#scale-a-deployment}
@@ -19,10 +19,10 @@ kubectl scale $RESOURCE/$NAME --filename=$FILE --namespace=default --replicas=$N
 Imperative command:
 
 ```shell
-kubectl scale deployments.apps/$NAME --replicas=$NUMBER deployment/$NAME --namespace=default
+kubectl scale --replicas=$NUMBER deployments.apps/$NAME --namespace=default
 ```
 
-Alternatively, update the number of replicas in the manifest and apply the changes using `kubectl apply`:
+Alternatively, update the number of replicas within a manifest and apply the changes:
 
 ```shell
 kubectl apply --filename=$FILE

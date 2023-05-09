@@ -5,9 +5,9 @@ draft = false
 weight = 8
 +++
 
-A `NodePort` service provides external access to Kubernetes applications by creating a listening port on each node in the cluster. You can connect to the service by simply using the port and IP addresses from one of these nodes.
+A `NodePort` service provides external access to Kubernetes applications by creating a listening port on each node in the cluster. You can connect to the service by simply using the port and IP addresses from one of the nodes.
 
-**Pitfall**: nodeport can only use ports `30000` to `32767`.
+**Pitfall**: nodeport can only use ports in the range of `30000` to `32767`.
 
 
 ## Create a nodeport service {#create-a-nodeport-service}

@@ -22,7 +22,7 @@ menu:
 paginate: 3
 params:
   about:
-    description: Preparing for the certified Kubernetes administrator exam (with four years professional Kubernetes experience). Part time Emacs and literate DevOps enthusiast.
+    description: Currently preparing for the certified Kubernetes administrator exam (with four years of professional experience with Kubernetes). Part time Emacs and literate DevOps enthusiast.
     logo: images/console-dark.svg
     title: James Hilling BSc
   socialLinks:
