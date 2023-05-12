@@ -22,7 +22,7 @@ Imperative command:
 kubectl scale --replicas=$NUMBER deployments.apps/$NAME --namespace=default
 ```
 
-Alternatively, update the number of replicas within a manifest and apply the changes:
+Alternatively, update the number of replicas within the manifest and apply the changes:
 
 ```shell
 kubectl apply --filename=$FILE

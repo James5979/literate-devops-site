@@ -17,7 +17,7 @@ kubectl create deployment $NAME --image=$IMAGE --namespace=default --replicas=3
 
 Example manifest:
 
-```yaml { linenos=inline }
+```yaml { linenos=inline, hl_lines=["2","13-17"] }
 apiVersion: apps/v1
 kind: Deployment
 metadata:

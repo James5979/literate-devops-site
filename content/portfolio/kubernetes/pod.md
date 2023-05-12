@@ -29,7 +29,6 @@ spec:
   containers:
   - name: nginx
     image: docker.io/library/nginx:1.24.0
-    imagePullPolicy: Never
 ```
 
 Resource output for a pod:
