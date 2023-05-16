@@ -4,7 +4,7 @@ draft = false
 weight = 13
 +++
 
-A namespace is a mechanism to isolate groups of resources in a cluster.
+A namespace is a mechanism to isolate groups of resources within a cluster.
 
 
 ## Create a namespace {#create-a-namespace}
@@ -30,13 +30,13 @@ Resource output for a namespace:
 kubectl get namespaces/$NAME
 ```
 
-To change to a certain namespace, permanently:
+To permanently change to a particular namespace:
 
 ```shell
 kubectl config set-context --current --namespace=$NAME
 ```
 
-Show contexts to see what the current namespace is set to:
+View the active context (to identify the current namespace):
 
 ```shell
 kubectl config get-contexts

@@ -23,7 +23,7 @@ kubectl create service loadbalancer $NAME --namespace=default --tcp=$PORT:$TARGE
 
 Example manifest:
 
-```yaml { linenos=inline, hl_lines=["8-9","18"] }
+```yaml { linenos=inline, hl_lines=["9-10","19-20"] }
 apiVersion: v1
 kind: Service
 metadata:
@@ -32,7 +32,6 @@ metadata:
   labels:
     app: nginx
   annotations:
-    #kubernetes.civo.com/loadbalancer-algorithm: round_robin
     kubernetes.civo.com/loadbalancer-algorithm: least_connections
     kubernetes.civo.com/firewall-id: 9d3d230e-c2c4-44fc-834f-ce36ce83419f
 spec:
@@ -44,14 +43,12 @@ spec:
     protocol: TCP
     targetPort: 80
   type: LoadBalancer
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local
 ```
 
-A Kubernetes loadbalancer service makes extensive use of metadata annotations, so that the external load balancer can be configured using the service.
+The Kubernetes loadbalancer service uses metadata annotations to provide extra configuration options for the external load balancer.
 
-For instance, here is an [example](https://www.civo.com/docs/kubernetes/load-balancers) of the annotations used by the Civo public provider.
-
-**Note**: each public cloud provider will use its own set of annotations, to configure their own external load balancers.
+For reference, see the annotations used to configure the [Civo](https://www.civo.com/docs/kubernetes/load-balancers) load balancer.
 
 Resource output for a loadbalancer service:
 

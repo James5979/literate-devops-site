@@ -5,17 +5,23 @@ draft = false
 weight = 12
 +++
 
-Use the `kubectl explain` command to output Kubernetes documentation for a particular resource.
+Use the `kubectl explain` command to view the documentation for a resource.
 
 **Examples**
 
-Show the documentation for the `ReplicaSet` resource:
+Show the documentation for a `ReplicaSet`:
 
 ```shell
-kubectl explain ReplicaSet | head --lines=10
+kubectl explain ReplicaSet
 ```
 
-Recursive output shows all nested fields within the resource:
+Show the documentation for the spec of a `ReplicaSet`:
+
+```shell
+kubectl explain ReplicaSet.spec
+```
+
+You can optionally choose to display the output with nested fields:
 
 ```shell
 kubectl explain ReplicaSet.spec --recursive
