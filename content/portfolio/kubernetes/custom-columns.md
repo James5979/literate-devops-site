@@ -1,19 +1,16 @@
 +++
 title = "Custom columns"
-tags = ["command"]
 draft = false
 weight = 21
 +++
 
 Custom columns allows you to customise table output.
 
-Example `custom-columns` (using JSONPath syntax):
+Example usage of custom columns output (using a JSONPath syntax):
 
 ```shell
 kubectl get pods --namespace=default --output=custom-columns=NAME:metadata.name,IP:status.podIP,NODE:spec.nodeName
 ```
-
-Output:
 
 | NAME                   | IP          | NODE                |
 |------------------------|-------------|---------------------|

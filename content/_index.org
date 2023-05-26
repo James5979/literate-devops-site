@@ -3,12 +3,12 @@
 
 🚧 *SITE UNDER CONSTRUCTION* 🚧
 
-A minimalist's tech blog.
+A minimal tech blog.
 
-*Key interests:*
+*My interests:*
 
-1) [[/portfolio/kubernetes/][Kubernetes]]
+1) Kubernetes
 2) Endpoint security
 3) Public cloud
-4) [[/portfolio/lisp/][Lisp]]
+4) Lisp
 5) Literate DevOps

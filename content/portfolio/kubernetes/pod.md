@@ -1,10 +1,13 @@
 +++
 title = "Pod"
+description = "Kubernetes pods."
 draft = false
 weight = 1
 +++
 
-A Pod is the smallest unit of compute within a Kubernetes cluster.
+A `Pod` is the smallest unit of compute in a Kubernetes cluster.
+
+Each pod encapsulates one or more containers, and is accompanied by both metadata and a specification, containing all the necessary information to fully define an application.
 
 
 ## Create a pod {#create-a-pod}
@@ -36,3 +39,8 @@ Resource output for a pod:
 ```shell
 kubectl get pods/$NAME --namespace=default
 ```
+
+
+## References {#references}
+
+-   [Unsplash](https://unsplash.com/photos/RDIa_qFpWHc)

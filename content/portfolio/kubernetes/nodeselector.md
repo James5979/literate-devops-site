@@ -6,13 +6,13 @@ weight = 26
 
 Schedule workloads on specific nodes.
 
-**Prerequisite**: label nodes with special workloads, e.g. requires special hardware, such as a GPU.
+**Prerequisite**: label any node that contains special hardware for running particular workloads, such as having access to a GPU, etc.
 
 Schedule a pod on a particular node (or set of nodes) using a `nodeSelector`.
 
 Example manifest:
 
-```yaml { linenos=inline, hl_lines=["12-13"] }
+```yaml { linenos=inline, hl_lines=["13-14"] }
 apiVersion: v1
 kind: Pod
 metadata:
@@ -23,7 +23,8 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: nginx
+    image: docker.io/library/nginx:1.24.0
+    imagePullPolicy: IfNotPresent
   nodeSelector:
-    compute: large
+    compute: small
 ```

@@ -1,6 +1,5 @@
 +++
-title = "Kubernetes documentation"
-tags = ["command", "tip"]
+title = "Documentation"
 draft = false
 weight = 12
 +++
@@ -15,13 +14,13 @@ Show the documentation for a `ReplicaSet`:
 kubectl explain ReplicaSet
 ```
 
-Show the documentation for the spec of a `ReplicaSet`:
+Show the documentation for the `spec` dictionary within a `ReplicaSet`:
 
 ```shell
 kubectl explain ReplicaSet.spec
 ```
 
-You can optionally choose to display the output with nested fields:
+You can optionally choose to display this output as nested fields instead:
 
 ```shell
 kubectl explain ReplicaSet.spec --recursive

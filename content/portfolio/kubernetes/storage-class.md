@@ -1,0 +1,23 @@
++++
+title = "StorageClass"
+draft = false
+weight = 67
++++
+
+Dynamically provision volumes based on persistent volume claims.
+
+Example manifest (requires [Longhorn](https://longhorn.io)):
+
+```yaml { linenos=inline }
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: longhorn
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+parameters:
+  numberOfReplicas: "3"
+  staleReplicaTimeout: "2880"
+  fromBackup: ""
+  fsType: "ext4"
+```

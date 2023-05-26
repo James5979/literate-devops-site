@@ -1,17 +1,16 @@
 +++
 title = "Scaling"
-tags = ["command"]
 draft = false
 weight = 6
 +++
 
-To scale the number replicas used by certain Kubernetes resources, use the `kubectl scale` command:
+To scale the number replicas used by Kubernetes resources, use the `kubectl scale` command:
 
 ```shell
 kubectl scale --replicas=$NUMBER --filename=$FILE --namespace=default
 ```
 
-**Note**: this command will not update the manifest file specified within the `--filename` option (above).
+**Note**: this command will not update the manifest file specified within the `--filename` option (shown above).
 
 
 ## Scale a deployment {#scale-a-deployment}

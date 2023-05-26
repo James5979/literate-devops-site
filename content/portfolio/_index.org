@@ -1,6 +1,6 @@
 #+author: James
-#+title: Portfolio
+#+title: Portfolio_
 #+draft: false
 #+startup: showall
 
-A portfolio of my interests.
+A portfolio of my technical interests.

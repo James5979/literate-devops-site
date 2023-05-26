@@ -1,6 +1,5 @@
 +++
 title = "Tolerations"
-tags = ["tip"]
 draft = false
 weight = 24
 +++
@@ -31,7 +30,8 @@ spec:
     effect: "NoSchedule"
   containers:
   - name: nginx
-    image: nginx
+    image: docker.io/library/nginx:1.24.0
+    imagePullPolicy: IfNotPresent
 ```
 
 Toleration operators:
@@ -42,14 +42,14 @@ Toleration operators:
 
 | Operator | Description                        |
 |----------|------------------------------------|
-| Equal    | Only the keys must match           |
+| Equal    | Only keys must match               |
 | Exists   | Must have matching key-value pairs |
 
 </div>
 
-**Pitfall**: tolerations do **NOT** ensure that a pod will be scheduled on a node with a particular taint, it only permits that a pod can be scheduled on such a node.
+**Pitfall**: tolerations do **not** ensure that a pod will be scheduled on a node with a particular taint, it only permits that a pod can be scheduled on such a node.
 
-**CKA Exam Tip**: tolerations require that you reference the [kubernetes.io](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) documentation, since no imperative command exists. You can always use the output from the corresponding taint to infer what a toleration should look like, albeit without the toleration operator.
+**CKA Exam Tip**: tolerations require that you reference the [kubernetes.io](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) documentation since no imperative command exists. You can always use the output from the corresponding taint to infer what a toleration should look like, albeit without the toleration operator be present.
 
 **Example**
 

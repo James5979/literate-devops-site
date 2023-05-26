@@ -3,4 +3,7 @@
 #+draft: false
 #+startup: showall
 
+#+attr_html: :width 800px
+[[/images/container-ship.jpg]]
+
 A [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]] of Kubernetes notes and manifests.

@@ -4,13 +4,15 @@ draft = false
 weight = 22
 +++
 
-Show output matching only the following labels:
+Identify sets of Kubernetes objects using selectors.
+
+Show output for matching labels:
 
 ```shell
 kubectl get pods --selector=$LABEL1,$LABEL2,$LABEL3
 ```
 
-**Note**: the comma syntax above refers to an **AND** statement.
+**Note**: the comma syntax above is an **AND** statement.
 
 To count the total number of objects that match a certain label:
 

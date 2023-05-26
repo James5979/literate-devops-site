@@ -1,11 +1,10 @@
 +++
 title = "NodePort"
-tags = ["tip"]
 draft = false
 weight = 8
 +++
 
-A `NodePort` service provides external access to Kubernetes applications by creating a listening port on each node in the cluster. You can connect to the service by simply using the port and IP address from one of the nodes.
+A `NodePort` service provides external access to Kubernetes applications by creating a listening port on each node within the cluster. You can connect to the service by simply using the port and IP address from one of the nodes.
 
 **Pitfall**: nodeport can only use ports in the range of `30000` to `32767`.
 
@@ -18,7 +17,7 @@ Imperative command:
 kubectl create service nodeport $NAME --namespace=default --node-port=$NODEPORT --tcp=$PORT:$TARGETPORT
 ```
 
-**Pitfall**: the label selector on the service will have to be updated manually, since this command does not directly expose any application. Use the `kubectl expose` [command](/portfolio/kubernetes/exposing/) if you want to have the labels set to the correct values automatically.
+**Pitfall**: the selector for the service will have to be updated manually, since this command does not directly expose an application. Use the `kubectl expose` [command](/portfolio/kubernetes/exposing/) if you wish to have the selector labels set to their correct values automatically.
 
 Example manifest:
 

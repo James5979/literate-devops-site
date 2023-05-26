@@ -4,9 +4,9 @@ draft = false
 weight = 4
 +++
 
-A ReplicaSet ensures that there is always a stable number of pods based on the number of replicas.
+A `ReplicaSet` ensures that there is always a stable number of [pods](/portfolio/kubernetes/pod/) based on the number of replicas.
 
-**Note**: ReplicaSets are very similar to [ReplicationControllers](/portfolio/kubernetes/replicationcontroller/), the exception being that a replicaset uses a selector to track pod replicas.
+**Note**: ReplicaSets are very similar to [ReplicationControllers](/portfolio/kubernetes/replicationcontroller/), with the exception being that a replicaset uses a selector to keep track of pod replicas.
 
 
 ## Create a replicaset {#create-a-replicaset}

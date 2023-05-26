@@ -1,9 +1,10 @@
 +++
 title = "Taints"
-tags = ["command"]
 draft = false
 weight = 23
 +++
+
+Taints are used to repel pods during scheduling.
 
 Taint a node and mark it as non-schedulable:
 
@@ -17,19 +18,19 @@ Add multiple taints to a node:
 kubectl taint nodes $NODE $LABEL1:NoSchedule $LABEL2:NoSchedule
 ```
 
-Taint a node and prefer not to schedule any pods (without a toleration):
+Taint a node and prefer not to schedule pods:
 
 ```shell
 kubectl taint nodes $NODE $LABEL:PreferNoSchedule
 ```
 
-Taint a node and evict any pods (without a toleration):
+Taint a node and evict any pods that do **not** have a toleration:
 
 ```shell
 kubectl taint nodes $NODE $LABEL:NoExecute
 ```
 
-View all taints on a particular node:
+View all taints that exist on a node:
 
 ```shell
 kubectl describe nodes/$NODE | grep Taints

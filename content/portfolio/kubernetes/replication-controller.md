@@ -4,7 +4,7 @@ draft = false
 weight = 3
 +++
 
-A ReplicationController is responsible for keeping the total number of replicas constant.
+A `ReplicationController` is responsible for keeping the total number of replicas constant.
 
 
 ## Create a replication controller {#create-a-replication-controller}

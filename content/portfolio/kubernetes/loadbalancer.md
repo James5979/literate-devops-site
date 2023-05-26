@@ -8,7 +8,7 @@ The `LoadBalancer` service is similar to a `ClusterIP` service, except that it i
 
 For instance, here is an [example](https://www.civo.com/learn/managing-external-load-balancers-on-civo) of just one type of loadbalancer service, offered by the [Civo](https://civo.com/) public cloud provider.
 
-**Note**: a loadbalancer service is not to be mistaken for the internal load balancer that Kubernetes provides (automatically) between [pods](/portfolio/kubernetes/pod/) within a [replicaset](/portfolio/kubernetes/replicaset/).
+**Note**: a loadbalancer service should **not** be mistaken for the internal load balancer that Kubernetes provides between [pods](/portfolio/kubernetes/pod/) (in a [replicaset](/portfolio/kubernetes/replicaset/)).
 
 
 ## Create a loadbalancer service {#create-a-loadbalancer-service}
@@ -19,7 +19,7 @@ Imperative command:
 kubectl create service loadbalancer $NAME --namespace=default --tcp=$PORT:$TARGETPORT
 ```
 
-**Pitfall**: the label selector on the service will have to be updated manually, since this command does not directly expose any application. Use the `kubectl expose` [command](/portfolio/kubernetes/exposing/) if you want to have the labels set to the correct values automatically.
+**Pitfall**: the selector for the service will have to be updated manually, since this command does not directly expose an application. Use the `kubectl expose` [command](/portfolio/kubernetes/exposing/) if you wish to have the selector labels set to their correct values automatically.
 
 Example manifest:
 
@@ -46,9 +46,7 @@ spec:
   externalTrafficPolicy: Local
 ```
 
-The Kubernetes loadbalancer service uses metadata annotations to provide extra configuration options for the external load balancer.
-
-For reference, see the annotations used to configure the [Civo](https://www.civo.com/docs/kubernetes/load-balancers) load balancer.
+The Kubernetes loadbalancer service uses metadata annotations to provide extra configuration options for external load balancers, e.g. see the annotations used to configure a [Civo](https://www.civo.com/docs/kubernetes/load-balancers) load balancer.
 
 Resource output for a loadbalancer service:
 

@@ -13,8 +13,6 @@ The default limits and requests for a pod are used when no resource requirements
 
 ## Create the default (CPU and memory) limits and requests {#create-the-default--cpu-and-memory--limits-and-requests}
 
-No imperative command.
-
 Example manifest:
 
 ```yaml { linenos=inline }
@@ -43,7 +41,7 @@ spec:
     type: Container
 ```
 
-**CKA Exam Tip**: limit ranges require that you reference the [kubernetes.io](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) documentation, since no imperative command exists. You can always use the `kubectl explain` command to infer what fields you should use.
+**CKA Exam Tip**: limit ranges require that you reference the [kubernetes.io](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/) documentation, since no imperative command exists. You can always use the `kubectl explain` command to infer what fields you should use.
 
 Resource output for a limit range:
 

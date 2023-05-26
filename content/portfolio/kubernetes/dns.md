@@ -4,57 +4,48 @@ draft = false
 weight = 14
 +++
 
-Kubernetes uses a built-in DNS server, so that applications are able to connect to each other using domain names.
+Kubernetes uses a built-in DNS server, allowing applications to connect to each other using domain names.
 
-To connect to an application running within a pod, first expose an application using a Kubernetes service, then connect to that application using the domain name created for that service.
+To connect to a Kubernetes application, expose the application using a Kubernetes [service](/portfolio/kubernetes/service/), then use the domain name for that service as the endpoint in any subsequent application configuration.
 
-To get the Fully Qualified Domain Name (FQDN) for the Kubernetes service, simply connect to one of the endpoints of that service, and check the contents of `/etc/resolv.conf`.
-
-You should be able to find the FQDN for the service by comparing all the IP addresses within `/etc/resolv.conf` to the IP address for the Kubernetes service, and cross-reference the FQDN.
-
-```shell
-kubectl exec pods/$NAME --namespace=$NAMESPACE -- /bin/cat /etc/resolv.conf
-```
-
-If this appears to be a little arduous, then you can always construct the FQDN yourself, using the canonical form:
+To use the Fully Qualified Domain Name (FQDN) for a Kubernetes service, specify it using the form:
 
 ```text
 <my-service>.<namespace>.svc.<cluster-name>
 ```
 
-To connect to a service within the same namespace, the domain name is exactly the same as the name given to the Kubernetes service.
+To connect to a Kubernetes service in a different namespace, you must either use the FQDN (see above), or using this shorthand:
 
-To connect to a service within a different namespace, you can either use the FQDN, or you can use the shorthand `<my-service>.<namespace>`.
+```text
+<my-service>.<namespace>
+```
 
-To connect to a pod in a different namespace, you must always use the FQDN of the pod:
+To connect to a [pod](/portfolio/kubernetes/pod/) in a different namespace, you must always use the Fully Qualified Domain Name of the pod:
 
 ```text
 <my-pod>.<namespace>.pod.<cluster-name>.
 ```
 
-**Note**: always use a service to communicate with a pod, i.e. do not a FQDN, since the domain name for the pod is transient.
+**Note**: always use a Kubernetes service to connect to another pod, i.e. do not use the FQDN for a pod within a Kubernetes application, since pod domain names are transient.
 
-To find the name of the cluster (kubeadm-based):
+To find out the cluster name in a kubeadm deployed Kubernetes cluster:
 
 ```shell
-kubectl get configmaps/kubeadm-config --namespace=kube-system --output=jsonpath='{.data.ClusterConfiguration}' | grep dnsDomain
+echo -n "Cluster name: " && kubectl get configmaps/kubeadm-config --namespace=kube-system --output=jsonpath='{.data.ClusterConfiguration}' | awk '/dnsDomain/ { print $2}'
 ```
 
-Output:
+Cluster name: cluster.local
 
-```text
-dnsDomain: cluster.local
-```
 
-Example FQDNs (for a pod and a service):
+## Examples {#examples}
 
 <style>.table-nocaption table { width: 70%;  }</style>
 
 <div class="ox-hugo-table table-nocaption">
 
-| Resource | Fully Qualified Domain Name          |
-|----------|--------------------------------------|
-| Pod      | 10-96-0-10.default.pod.cluster.local |
-| Service  | nginx.default.svc.cluster.local      |
+| Resource Object | Fully Qualified Domain Name          |
+|-----------------|--------------------------------------|
+| Pod             | 10-96-0-10.default.pod.cluster.local |
+| Service         | nginx.default.svc.cluster.local      |
 
 </div>

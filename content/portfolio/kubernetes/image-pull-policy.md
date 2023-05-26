@@ -4,7 +4,7 @@ draft = false
 weight = 2
 +++
 
-If you wish to deploy a Kubernetes application using images cached on the nodes, ensure that the `imagePullPolicy` is set to either `Never` or `IfNotPresent`.
+If you wish to deploy a Kubernetes application using images cached on nodes, ensure that the `imagePullPolicy` is set to either `Never` or `IfNotPresent`.
 
 Example manifest:
 

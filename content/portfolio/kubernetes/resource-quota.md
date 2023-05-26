@@ -1,11 +1,10 @@
 +++
 title = "ResourceQuota"
-tags = ["tip"]
 draft = false
 weight = 28
 +++
 
-Limit aggregate resource consumption per namespace.
+Limit aggregate resource consumption per namespace. --- [1]
 
 
 ## Create a namespace-scoped resource quota {#create-a-namespace-scoped-resource-quota}
@@ -38,9 +37,9 @@ spec:
     requests.memory: 1Gi
 ```
 
-**CKA Exam Tip**: resource quotas require that you reference the [kubernetes.io](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) documentation, since no imperative command exists. You can always use the `kubectl explain` command to infer what fields you should use.
+**CKA Exam Tip**: resource quotas require that you reference the [kubernetes.io](https://kubernetes.io/docs/concepts/policy/resource-quotas/) documentation, since no imperative command exists. You can always use the `kubectl explain` command to infer what fields you should use.
 
-**Pitfall**: a cpu or memory quota creates the necessity for each pod to define its own resource requirements. If no requirements have been set, and no default limits exist, then the pod will not be scheduled.
+**Pitfall**: creating a resource quota for CPU and/or memory means that each pod must have its own resource requirements defined. If no requirements have been set, and no defaults exist, then the pod will not be scheduled.
 
 Resource output for a quota:
 
@@ -55,11 +54,7 @@ kubectl describe resourcequotas/$NAME --namespace=$NAMESPACE
 ```
 
 
-## Create a pod and specify the resource requirements {#create-a-pod-and-specify-the-resource-requirements}
-
-Define the resource requirements for a pod.
-
-No imperative command.
+## Define the resource requirements for a pod {#define-the-resource-requirements-for-a-pod}
 
 Example manifest:
 
@@ -79,8 +74,8 @@ metadata:
 spec:
   containers:
   - name: busybox
-    image: docker.io/library/busybox:latest
-    imagePullPolicy: Never
+    image: docker.io/library/busybox:1.36.0
+    imagePullPolicy: IfNotPresent
     args:
     - "while true ; do sleep 3600 ; done"
     resources:
@@ -91,3 +86,8 @@ spec:
         cpu: 250m
         memory: 128Mi
 ```
+
+
+## References {#references}
+
+1.  [kubernetes.io](https://kubernetes.io/docs/concepts/policy/resource-quotas/)

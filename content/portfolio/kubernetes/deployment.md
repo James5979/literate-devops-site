@@ -4,7 +4,7 @@ draft = false
 weight = 5
 +++
 
-A Kubernetes deployment provides declaritive updates to [Pods](/portfolio/kubernetes/pod/) (using [Replicasets](/portfolio/kubernetes/replicaset/)), with the ability to rollback when necessary, and zero downtime when using a rolling update strategy.
+A Kubernetes `Deployment` provides declaritive updates to [Pods](/portfolio/kubernetes/pod/) (using [Replicasets](/portfolio/kubernetes/replicaset/)), with the ability to rollback when necessary, and zero downtime when using a rolling update strategy.
 
 
 ## Create a deployment {#create-a-deployment}
@@ -58,7 +58,7 @@ Show all objects created by a deployment (via selectors):
 kubectl get all --namespace=default --selector=$LABELS
 ```
 
-Imperative command to update a container image in a deployment:
+Imperative command to update a container image for a deployment:
 
 ```shell
 kubectl set image deployments.apps/$NAME $CONTAINER=$IMAGE:$TAG

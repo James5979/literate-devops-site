@@ -1,6 +1,5 @@
 +++
-title = "Counting objects"
-tags = ["command"]
+title = "Word count"
 draft = false
 weight = 15
 +++

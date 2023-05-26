@@ -15,7 +15,7 @@ Imperative command:
 kubectl create service clusterip $NAME --namespace=default --tcp=$PORT:$TARGETPORT
 ```
 
-**Pitfall**: the label selector on the service will have to be updated manually, since this command does not directly expose any application. Use the `kubectl expose` command if you want to have the labels set to the correct values automatically.
+**Pitfall**: the selector for the service will have to be updated manually, since this command does not directly expose an application. Use the `kubectl expose` command if you wish to have the selector labels set to their correct values automatically.
 
 Example manifest:
 
