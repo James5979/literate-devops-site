@@ -1,10 +1,11 @@
 +++
 title = "Ingress Controller"
-draft = true
+description = "Kubernetes ingress controller."
+draft = false
 weight = 70
 +++
 
-The Kubernetes `NGINX ingress controller`.
+All ingress controllers provide access to the Kubernetes `Ingress` resource. The NGINX ingress controller is just one of the many ingress controllers to choose from.
 
 
 ## Installation {#installation}

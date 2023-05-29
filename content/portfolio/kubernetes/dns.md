@@ -1,20 +1,19 @@
 +++
 title = "DNS"
+description = "Kubernetes DNS."
 draft = false
 weight = 14
 +++
 
-Kubernetes uses a built-in DNS server, allowing applications to connect to each other using domain names.
+Kubernetes uses a built-in DNS server called CoreDNS, allowing applications to connect to each other using domain names.
 
-To connect to a Kubernetes application, expose the application using a Kubernetes [service](/portfolio/kubernetes/service/), then use the domain name for that service as the endpoint in any subsequent application configuration.
-
-To use the Fully Qualified Domain Name (FQDN) for a Kubernetes service, specify it using the form:
+To use the Fully Qualified Domain Name (FQDN) for a Kubernetes [service](/portfolio/kubernetes/clusterip/), specify it using the form:
 
 ```text
 <my-service>.<namespace>.svc.<cluster-name>
 ```
 
-To connect to a Kubernetes service in a different namespace, you must either use the FQDN (see above), or using this shorthand:
+To connect to a Kubernetes service in a different namespace, you must use the FQDN (see above), or the shorthand:
 
 ```text
 <my-service>.<namespace>
@@ -26,9 +25,9 @@ To connect to a [pod](/portfolio/kubernetes/pod/) in a different namespace, you 
 <my-pod>.<namespace>.pod.<cluster-name>.
 ```
 
-**Note**: always use a Kubernetes service to connect to another pod, i.e. do not use the FQDN for a pod within a Kubernetes application, since pod domain names are transient.
+**Note**: always use a Kubernetes service to connect to a pod and not the FQDN, since domain names for pods are transient by design.
 
-To find out the cluster name in a kubeadm deployed Kubernetes cluster:
+To find the cluster name (for a kubeadm deployed cluster):
 
 ```shell
 echo -n "Cluster name: " && kubectl get configmaps/kubeadm-config --namespace=kube-system --output=jsonpath='{.data.ClusterConfiguration}' | awk '/dnsDomain/ { print $2}'
@@ -49,3 +48,78 @@ Cluster name: cluster.local
 | Service         | nginx.default.svc.cluster.local      |
 
 </div>
+
+
+## Testing Kubernetes DNS {#testing-kubernetes-dns}
+
+Example manifest:
+
+```yaml { linenos=inline }
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+  labels:
+    app: busybox
+spec:
+  containers:
+  - name: busybox
+    image: docker.io/library/busybox:1.36.0
+    imagePullPolicy: IfNotPresent
+    args:
+    - "nc"
+    - "-v"
+    - "-w"
+    - "5"
+    - "-z"
+    - "nginx.dev"
+    - "80"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: dev
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: dev
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: docker.io/library/nginx:1.24.0
+    imagePullPolicy: IfNotPresent
+    ports:
+    - name: http
+      containerPort: 80
+```
+
+View the logs for the busybox pod and see whether the domain `nginx.dev` was resolvable:
+
+```shell
+echo -n "Output: " && kubectl logs pods/busybox --namespace=default
+```
+
+Output: nginx.dev (10.43.16.241:80) open
+
+The output shows that `nginx.dev` was resolvable.

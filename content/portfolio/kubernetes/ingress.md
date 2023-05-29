@@ -1,35 +1,35 @@
 +++
 title = "Ingress"
-draft = true
+description = "Ingress rules."
+draft = false
 weight = 71
 +++
 
-Choose a `Host/path` syntax when specifying the `--rule` option within the `kubectl create ingress` command in order to specify the pathType required:
+An `Ingress` is an API object that manages external access to the services within the cluster. Ingress usually provides load balancing, SSL termination and name-based virtual hosting. --- [1]
+
+
+## Create ingress rules {#create-ingress-rules}
+
+Imperative command:
+
+```shell
+kubectl create ingress $NAME --annotation=nginx.ingress.kubernetes.io/rewrite-target=/ --class=$CLASS --rule="$URL=$SERVICE:$PORT"
+```
+
+**Note**: if you use a wildcard within your path (i.e. when specifying the `--rule` option), then the Kubernetes ingress object will default to using `Prefix` value as its `pathType`.
 
 | pathType | Host/path         |
 |----------|-------------------|
 | Exact    | foo.bar.com/baz   |
 | Prefix   | foo.bar.com/baz\* |
 
-Use an imperative command to generate the manifest for a Kubernetes `Ingress`:
+Example manifest (fanout model):
 
-```shell
-kubectl create ingress $NAME --annotation=nginx.ingress.kubernetes.io/rewrite-target=/ \
---class=$CLASS \
---dry-run=client \
---rule="$HOST=$SERVICE:$PORT" \
---output=yaml
-```
-
-**Examples**
-
-Ingress using a simple fanout model (single loadbalancer):
-
-```yaml
+```yaml { linenos=inline }
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: simple-fanout
+  name: ingress-fanout
 spec:
   rules:
   - host: foo.bar.com
@@ -41,7 +41,7 @@ spec:
           service:
             name: service1
             port:
-              number: 4200
+              number: 80
       - path: /bar
         pathType: Prefix
         backend:
@@ -51,51 +51,20 @@ spec:
               number: 8080
 ```
 
-Ingress using wildcards:
+Example manifest (name-based virtual hosts):
 
-```yaml
+```yaml { linenos=inline }
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: wildcards
-spec:
-  rules:
-  - host: "foo.bar.com"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/bar"
-        backend:
-          service:
-            name: service1
-            port:
-              number: 80
-  - host: "*.foo.com"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/foo"
-        backend:
-          service:
-            name: service2
-            port:
-              number: 80
-```
-
-Ingress using name-based virtual hosts:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: name-based-virtual-hosts
+  name: ingress-vhosts
 spec:
   rules:
   - host: foo.bar.com
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/"
+        pathType: Prefix
         backend:
           service:
             name: service1
@@ -104,11 +73,47 @@ spec:
   - host: bar.foo.com
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/"
+        pathType: Prefix
         backend:
           service:
             name: service2
             port:
               number: 80
 ```
+
+Example manifest (wildcards):
+
+```yaml { linenos=inline }
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcards
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - path: "/bar"
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  - host: "*.foo.com"
+    http:
+      paths:
+      - path: "/foo"
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+```
+
+
+## References {#references}
+
+1.  [kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/ingress/)

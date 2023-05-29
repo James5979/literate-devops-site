@@ -15,7 +15,7 @@ Display the configmap containing the configuration of the cluster:
 kubectl get configmaps/kubeadm-config --namespace=kube-system --output=yaml
 ```
 
-Dump the current cluster state to **STDOUT**:
+Dump the current cluster state to STDOUT:
 
 ```shell
 kubectl cluster-info dump --all-namespaces --output=yaml
